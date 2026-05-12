@@ -3,256 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elevator Simulator — COMP 305 Project</title>
+    <title>Devon Montgomery-Eder</title>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=Fraunces:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-    <style>
-        :root {
-          --bg: #FAF9F6;
-          --bg-alt: #F0EFEB;
-          --text: #1a1a1a;
-          --text-muted: #555;
-          --accent: #2563EB;
-          --accent-light: #DBEAFE;
-          --border: #e0ddd6;
-          --card-shadow: 0 2px 16px rgba(0,0,0,0.06);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-          font-family: 'DM Sans', sans-serif;
-          background: var(--bg);
-          color: var(--text);
-          line-height: 1.75;
-          -webkit-font-smoothing: antialiased;
-        }
-
-        .hero {
-          background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-          color: #fff;
-          padding: 80px 24px 64px;
-          text-align: center;
-        }
-
-        .hero h1 {
-          font-family: 'Fraunces', serif;
-          font-size: clamp(2rem, 5vw, 3.2rem);
-          font-weight: 600;
-          letter-spacing: -0.02em;
-          margin-bottom: 12px;
-        }
-
-        .hero .subtitle {
-          font-size: 1.1rem;
-          color: #94a3b8;
-          max-width: 520px;
-          margin: 0 auto;
-        }
-
-        .hero .tag {
-          display: inline-block;
-          background: rgba(255,255,255,0.1);
-          border: 1px solid rgba(255,255,255,0.15);
-          border-radius: 100px;
-          padding: 6px 18px;
-          font-size: 0.8rem;
-          letter-spacing: 0.06em;
-          text-transform: uppercase;
-          margin-bottom: 20px;
-          color: #93c5fd;
-        }
-
-        .container {
-          max-width: 780px;
-          margin: 0 auto;
-          padding: 0 24px;
-        }
-
-        section {
-          padding: 48px 0;
-          border-bottom: 1px solid var(--border);
-        }
-
-        section:last-of-type { border-bottom: none; }
-
-        h2 {
-          font-family: 'Fraunces', serif;
-          font-size: 1.6rem;
-          font-weight: 600;
-          margin-bottom: 6px;
-          letter-spacing: -0.01em;
-        }
-
-        h2 .num {
-          color: var(--accent);
-          font-size: 0.85rem;
-          font-family: 'DM Sans', sans-serif;
-          font-weight: 700;
-          margin-right: 8px;
-          vertical-align: 2px;
-        }
-
-        .section-sub {
-          font-size: 0.85rem;
-          color: var(--text-muted);
-          text-transform: uppercase;
-          letter-spacing: 0.06em;
-          margin-bottom: 20px;
-        }
-
-        p { margin-bottom: 16px; color: #333; }
-
-        .diagram-wrapper {
-          background: #fff;
-          border: 1px solid var(--border);
-          border-radius: 12px;
-          padding: 24px;
-          margin: 32px 0;
-          box-shadow: var(--card-shadow);
-          text-align: center;
-        }
-
-        .diagram-wrapper img {
-          max-width: 100%;
-          height: auto;
-          border-radius: 6px;
-        }
-
-        .diagram-caption {
-          font-size: 0.85rem;
-          color: var(--text-muted);
-          margin-top: 12px;
-          font-style: italic;
-        }
-
-        .pillar-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 16px;
-          margin: 24px 0;
-        }
-
-        @media (max-width: 580px) {
-          .pillar-grid { grid-template-columns: 1fr; }
-        }
-
-        .pillar-card {
-          background: #fff;
-          border: 1px solid var(--border);
-          border-radius: 10px;
-          padding: 20px;
-          box-shadow: var(--card-shadow);
-        }
-
-        .pillar-card h3 {
-          font-family: 'Fraunces', serif;
-          font-size: 1.05rem;
-          font-weight: 600;
-          margin-bottom: 6px;
-        }
-
-        .pillar-card p {
-          font-size: 0.92rem;
-          margin-bottom: 0;
-          color: var(--text-muted);
-        }
-
-        .highlight-box {
-          background: var(--accent-light);
-          border-left: 4px solid var(--accent);
-          border-radius: 0 8px 8px 0;
-          padding: 20px 24px;
-          margin: 24px 0;
-        }
-
-        .highlight-box p { color: #1e3a5f; margin-bottom: 0; }
-
-        .impl-list {
-          list-style: none;
-          margin: 20px 0;
-        }
-
-        .impl-list li {
-          position: relative;
-          padding-left: 24px;
-          margin-bottom: 14px;
-          color: #333;
-        }
-
-        .impl-list li::before {
-          content: '';
-          position: absolute;
-          left: 0;
-          top: 10px;
-          width: 10px;
-          height: 10px;
-          border-radius: 50%;
-          background: var(--accent);
-        }
-
-        footer {
-          text-align: center;
-          padding: 40px 24px;
-          font-size: 0.85rem;
-          color: var(--text-muted);
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 <div class="hero">
-    <span class="tag">COMP 305, PA 3, Devon Montgomery-Eder</span>
-    <h1>Elevator Simulator</h1>
-    <p class="subtitle">This webpage overviews the implementation of Java based elevator system implemented with object oriented programming techniques, test driven development, and repository based team collaboration.</p>
+    <span class="tag">University of San Diego, Class of 2026</span>
+    <h1>Devon Montgomery-Eder</h1>
+    <p class="subtitle">B.A. Computer Science and B.B.A. Finance</p>
+    <div class="links">
+        <a href="mailto:devon1me@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/devon-montgomery-eder/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/deder-usd" target="_blank" rel="noopener">GitHub</a>
+    </div>
 </div>
 
 <div class="container">
 
-
     <section>
+        <p class="section-sub">About</p>
+        <h2><span class="num">01</span>About me</h2>
+        <p>
+            Senior at the University of San Diego, graduating this spring with a B.A. in Computer Science and a B.B.A. in Finance. My CS coursework has been about object-oriented design, test-driven development, and writing software with a team. Two recent projects are below.
+        </p>
+        <p>
+            Outside of class I've interned in growth equity, venture capital, audit, and corporate finance. The overlap of software and finance is where I want to keep working.
+        </p>
+    </section>
+
+    <!-- ============ PROJECT: SOLAR SYSTEM ============ -->
+    <section>
+        <p class="section-sub">Project &middot; COMP 305, Project 4 &middot; Spring 2026</p>
+        <h2><span class="num">02</span>Solar System Simulator</h2>
+        <p>
+            A browser-based simulation of our solar system. The Java backend computes gravity between bodies and streams the state to a web frontend over WebSocket. You can pause, change the time scale, zoom, and spawn spaceships with a click and drag.
+        </p>
+
         <div class="diagram-wrapper">
-            <img src="elevator-uml.png" alt="UML class diagram of the elevator simulator showing interfaces, abstract classes, and concrete elevator and scheduler types">
+            <img src="solar-system.png" alt="Screenshot of the solar system simulator running in the browser, showing the Sun and orbiting planets">
+            <div class="diagram-caption">The simulator running in the browser.</div>
+        </div>
+
+        <h3 style="font-family:'Fraunces',serif;font-size:1.1rem;font-weight:600;margin:24px 0 8px;">Design highlights</h3>
+        <div class="pillar-grid">
+            <div class="pillar-card">
+                <h3>Factory pattern</h3>
+                <p>The <code>SolarSystemFactory</code> hides the physical constants behind a single call. The simulation just asks the factory for a fully formed solar system.</p>
+            </div>
+            <div class="pillar-card">
+                <h3>Observer pattern</h3>
+                <p>The <code>Simulation</code> publishes frame state to any registered <code>SimulationListener</code>. The WebSocket server is one of those listeners, so the physics engine doesn't know or care that it's being viewed over the web.</p>
+            </div>
+            <div class="pillar-card">
+                <h3>Inheritance</h3>
+                <p><code>AbstractBody</code> is the base for <code>CelestialBody</code> (which is specialized into <code>Planet</code> and <code>Star</code>) and <code>Spaceship</code>. The simulation can treat every object uniformly while each type keeps its own behavior.</p>
+            </div>
+            <div class="pillar-card">
+                <h3>Encapsulation</h3>
+                <p>Physical state (position, velocity, mass) lives on the bodies. Tick logic lives on the simulation. The web frontend only reads broadcasted state frames, never the model directly.</p>
+            </div>
+        </div>
+
+        <h3 style="font-family:'Fraunces',serif;font-size:1.1rem;font-weight:600;margin:24px 0 8px;">What I built</h3>
+        <p>
+            My responsibility was <code>SolarSystemFactory</code> and its test class, <code>SolarSystemFactoryTest</code>. The factory builds the Sun and planets with physically consistent positions, masses, radii, and velocities, then hands the initial state to the simulation.
+        </p>
+        <p>
+            I built it test first. The test class is a set of physical invariants the factory must satisfy:
+        </p>
+        <ul class="impl-list">
+            <li><code>planetsOrderedByIncreasingDistance</code>: planets must be returned sorted by distance from the Sun.</li>
+            <li><code>everyPlanetHasPositiveDistanceFromSun</code>: no planet may share a position with the Sun.</li>
+            <li><code>everyPlanetHasPositiveMass</code> and <code>everyPlanetHasPositiveRadius</code>: basic physical sanity checks.</li>
+            <li><code>sunIsMoreMassiveThanEveryPlanet</code>: the Sun has to dominate the system's mass.</li>
+            <li><code>everyPlanetHasNonZeroVelocity</code>: planets have to actually be moving.</li>
+            <li><code>planetVelocityIsPerpendicularToPosition</code>: the trickiest one. A planet's initial velocity has to be perpendicular to the vector from the Sun, otherwise the planet goes in a straight line instead of orbiting.</li>
+        </ul>
+        <p>
+            Each commit on my branch is one failing test plus the code to make it pass. The factory's correctness is locked in by the tests, not by eyeballing planets in the simulator.
+        </p>
+
+        <div class="tag-row" style="margin-top:24px;">
+            <span class="chip">Java</span>
+            <span class="chip">Gradle</span>
+            <span class="chip">Factory pattern</span>
+            <span class="chip">Observer pattern</span>
+            <span class="chip">Test-driven development</span>
+            <span class="chip">WebSocket</span>
+            <span class="chip">JUnit</span>
         </div>
     </section>
 
-
+    <!-- ============ PROJECT: ELEVATOR ============ -->
     <section>
-        <p class="section-sub">Overview</p>
-        <h2><span class="num">01</span>What is the Elevator Simulator?</h2>
+        <p class="section-sub">Project &middot; COMP 305, Assignment 3 &middot; Spring 2026</p>
+        <h2><span class="num">03</span>Elevator Simulator</h2>
         <p>
-            The Elevator Simulator is a Java application that models how a real building's elevator system operates. The program different kinds of elevators with different rules for which floors to visit and which passengers to pick up. A scheduler decides which elevator should answer each call, and a simulator runs the entire process round after round until every passenger has been serviced and all elevators have returned to the ground floor.
-        </p>
-        <p>
-            The goal of this project was to practice planning and building software on a larger scale, first by designing, then writing tests, then implementing code. We also maintained best practices of keeping code clean and modular while collaborating as a team and providing one another with feedback by branching then submitting and vetting pull requests. This project provided us with direct experience following the four pillars SOLID principles of OOP in a complex system.
-        </p>
-    </section>
-
-
-    <section>
-        <p class="section-sub">Functional requirements</p>
-        <h2><span class="num">02</span>What does it do?</h2>
-        <p>
-            The simulator class accepts a several command-line inputs: the number of floors in the building, the type of scheduler to use, how many of each elevator type to create, and a file containing the list of passenger calls. It subsequently creates the building, loads the calls, and runs the simulation.
-        </p>
-        <p>
-            There are four elevator types with differing behaviors. The Standard Elevator visits any floor and accepts new calls that enable it to continue traveling in its current direction. The Freight Elevator services every floor but only carries one passenger at a time. The Pent House Elevator is only accessible to the ground and top floors. The Express Elevator handles the top half of the building and the ground floor by skipping everything in between.
-        </p>
-        <p>
-            There are two different scheduling strategies. The Simple Scheduler checks elevators from left to right and assigns the call to the first one that can accept it. The Complex Scheduler is more sophisticated and answers calls by evaluating all elevators that could handle the call and assigning the call to whichever one is closest to the pickup floor.
-        </p>
-        <p>
-            The scheduler can only assign one call each round, then every elevator moves one floor or remains stationary to pick up passengers, drop off passengers, or change directions. The simulation prints the full state of every elevator and any unanswered calls after each round. The simulation ends once all calls are completed and every elevator is back on the ground floor.
-        </p>
-    </section>
-
-
-    <section>
-        <p class="section-sub">Design</p>
-        <h2><span class="num">03</span>Why did we design it this way?</h2>
-        <p>
-            We designed the system around two key interfaces <code>Movable</code> and <code>Scheduler</code> so that the simulator never needs to know which specific elevator or scheduler it is working with. This makes our architecture flexible and easy to extend. Our design incorporates all four OOP pillars and several SOLID principles.
+            A Java application that models a building's elevator system. There are four elevator types, each with its own rules for which floors to visit and which passengers to pick up, plus two scheduling strategies that decide which elevator answers a given call. The simulation runs round by round until every passenger has been delivered and all elevators are back on the ground floor.
         </p>
 
+        <div class="diagram-wrapper">
+            <img src="elevator-uml.png" alt="UML class diagram of the elevator simulator showing interfaces, abstract classes, and concrete elevator and scheduler types">
+            <div class="diagram-caption">UML class diagram of the elevator simulator.</div>
+        </div>
+
+        <h3 style="font-family:'Fraunces',serif;font-size:1.1rem;font-weight:600;margin:24px 0 8px;">Design highlights</h3>
+        <p>
+            The system is built around two interfaces, <code>Movable</code> and <code>Scheduler</code>. The simulator never knows which specific elevator or scheduler it's working with. Adding a fifth elevator type means writing one new subclass and changing nothing else.
+        </p>
         <div class="pillar-grid">
             <div class="pillar-card">
                 <h3>Abstraction</h3>
@@ -260,72 +120,100 @@
             </div>
             <div class="pillar-card">
                 <h3>Inheritance</h3>
-                <p>All four elevator types extend the <code>ElevatorUnit</code> class, which holds the movement logic, floor tracking, pickup/dropoff behavior, and return-to-ground behavior for all types of elevators.</p>
+                <p>All four elevator types extend the <code>ElevatorUnit</code> class, which holds the shared movement, floor tracking, pickup, dropoff, and return-to-ground behavior.</p>
             </div>
             <div class="pillar-card">
                 <h3>Encapsulation</h3>
-                <p>Fields like <code>currentFloor</code>, <code>occupancy</code>, and <code>assignedCalls</code> are protected or private. The other classes interact via public methods and never directly impact an internal state.</p>
+                <p>Fields like <code>currentFloor</code>, <code>occupancy</code>, and <code>assignedCalls</code> are protected or private. Other classes interact via public methods and never touch internal state.</p>
             </div>
             <div class="pillar-card">
                 <h3>Polymorphism</h3>
-                <p>The Simulator holds a <code>List&lt;Movable&gt;</code> and a <code>Scheduler</code> reference. When the simulator runs, the correct <code>canAcceptCall()</code> and <code>assignCall()</code> behavior takes place based on the type of object.</p>
+                <p>The Simulator holds a <code>List&lt;Movable&gt;</code> and a <code>Scheduler</code> reference. At runtime, the correct <code>canAcceptCall()</code> and <code>assignCall()</code> behavior is dispatched based on the type of object.</p>
             </div>
         </div>
 
-        <p>
-            The design also follows several SOLID principles. The <strong>Single Responsibility Principle</strong> is reflected in each class having one clear job: <code>Call</code> stores call data, <code>ElevatorUnit</code> handles movement, and the different subclasses defines their own acceptance behaviors while the Simulator manages the rounds. The <strong>Open/Closed Principle</strong> applies because adding a new elevator type only requires creating a new subclass and overriding <code>canAcceptCall()</code> so that no existing code needs to change. The <strong>Liskov Substitution Principle</strong> holds because any <code>ElevatorUnit</code> subclass can replace another wherever a <code>Movable</code> is expected. The <strong>Dependency Inversion Principle</strong> is visible in the Simulator depending on the <code>Movable</code> and <code>Scheduler</code> interfaces rather than concrete classes.
-        </p>
-
-        <div class="highlight-box">
-            <p><strong>Key assumption:</strong> We decided that the Express Elevator defines "top half" as any floor strictly above <code>numFloors / 2</code> (integer division). For a 10-floor building, that means floors 6–10 and the ground floor are valid. We chose this interpretation because it cleanly divides the building and avoids confusion about the middle floor. An alternative would have been to include the middle floor, but excluding it keeps the express elevator's zone clearly separated from the standard elevator's zone, which makes scheduling decisions predictable.</p>
-        </div>
-
-        <p>
-            Another assumption we made was that when an elevator is returning to the ground floor with no calls, it should not accept new calls that require changing direction. This keeps the behavior predictable and avoids situations where an elevator would ping-pong between floors endlessly. The Pent House Elevator and Freight Elevator are exceptions because they can change direction when empty. We decided that was ok because their limited floor access and single-passenger rule already decreases the amonut of available calls they can service.
-        </p>
-    </section>
-
-    <section>
-        <p class="section-sub">Implementation</p>
-        <h2><span class="num">04</span>What I built:</h2>
-        <p>
-            I was responsible for implementing three classes: the <code>ExpressElevator</code>, the <code>PentHouseElevator</code>, and the <code>Simulator</code>.
-        </p>
-
+        <h3 style="font-family:'Fraunces',serif;font-size:1.1rem;font-weight:600;margin:24px 0 8px;">What I built</h3>
+        <p>I was responsible for three classes: <code>ExpressElevator</code>, <code>PentHouseElevator</code>, and the top-level <code>Simulator</code>.</p>
         <ul class="impl-list">
             <li>
-                <strong>ExpressElevator:</strong> This was the most challenging elevator to implement because its acceptance logic has multiple conditions. It needs to verify that both the start and end floors are either the ground floor or in the top half of the building, then check whether the call's direction matches the elevator's current travel direction. I used boolean logic to check the state <code>isStartValid</code> and <code>isEndValid</code> and handled the occupied versus empty cases separately. When the elevator has passengers, it behaves like a standard elevator within its valid zone. When the elevator is empty, it is more flexible and will change direction to answer a call.
+                <strong>ExpressElevator:</strong> the most complex elevator. Its acceptance logic has multiple conditions. Both the start and end floors have to be either the ground floor or in the top half of the building, and the call's direction has to match the elevator's current direction. I split the logic with booleans like <code>isStartValid</code> and <code>isEndValid</code>. An empty Express Elevator is flexible enough to change direction to answer a call. An occupied one behaves like a standard elevator inside its valid zone.
             </li>
             <li>
-                <strong>PentHouseElevator:</strong> This class has the most restrictive acceptance policy because it only travels between the ground floor and the top floor. I created helper methods like <code>isValidPentHouseFloor()</code> and <code>isGroundOrTopFloor()</code> to make the conditional logic easy to understand. The elevator only accepts a call if both floors in the call are within valid zones and the elevator is completely empty with no pending calls.
+                <strong>PentHouseElevator:</strong> the most restrictive elevator. It only travels between the ground floor and the top floor. I wrote helpers like <code>isValidPentHouseFloor()</code> and <code>isGroundOrTopFloor()</code> to keep the conditional logic readable. It only accepts a call if both floors are valid and the elevator is completely empty with no pending calls.
             </li>
             <li>
-                <strong>Simulator:</strong> This is the class that ties everything together. It reads command-line arguments, constructs the correct scheduler and elevators, loads calls from a file, and runs the round-by-round simulation loop. I focused on keeping <code>run()</code> clean by implementing helpers: <code>isSimulationComplete()</code> checks if all calls are done and elevators are home, <code>moveAllElevators()</code> iterates through the list, and <code>printRound()</code> formats the output. The <code>main</code> method parses all seven arguments and delegates construction to factory-style static methods like <code>createScheduler()</code> and <code>createElevators()</code>.
+                <strong>Simulator:</strong> the class that ties everything together. It reads command-line arguments, constructs the right scheduler and elevators, loads calls from a file, and runs the round-by-round simulation loop. I kept <code>run()</code> clean by pulling logic out into helpers: <code>isSimulationComplete()</code>, <code>moveAllElevators()</code>, and <code>printRound()</code>. The <code>main</code> method delegates construction to factory-style static methods like <code>createScheduler()</code> and <code>createElevators()</code>.
             </li>
         </ul>
-
         <p>
-            Throughout the project, we followed test-driven development. For each class I implemented, I wrote the unit tests first, let them fail, then wrote the minimum code to make them pass. Each commit represented one test and its subsequent implementation. We used branches for every class, opened pull requests for review, and gave each other comments prior to merging. I requested changes on my partner's pull requests around edge cases for direction handling, and they caught a boundary condition in my Express Elevator logic during their review.
+            We worked test first throughout: tests first, then the minimum code to make them pass, one commit per test. Each class had its own branch and pull request. I requested changes on my partners' pull requests around direction handling, and they caught a boundary bug in my Express Elevator during their review.
         </p>
+
+        <div class="tag-row" style="margin-top:24px;">
+            <span class="chip">Java</span>
+            <span class="chip">OOP pillars</span>
+            <span class="chip">SOLID</span>
+            <span class="chip">Interfaces</span>
+            <span class="chip">Test-driven development</span>
+            <span class="chip">JUnit</span>
+        </div>
     </section>
 
     <section>
-        <p class="section-sub">Reflection</p>
-        <h2><span class="num">05</span>What I learned:</h2>
-        <p>
-            This project taught me how much easier implementation becomes when you invest time in design upfront. Having a clear UML diagram and understanding the relationships between classes before writing code minimized the amount of refactoring I had to do after initial implementation. It also made dividing work with my partners easier because the interfaces established clear boundaries.
-        </p>
-        <p>
-            Test-driven development felt slow at first, but it was helpful. Writing tests first forced me to think about what each method should actually do before writing it, and it prevented logic bugs. I was more confident in our final product / code at the end because every class is backed by a test.
-        </p>
-        <p>
-            Working with pull requests and code reviews was also helpful. Getting feedback from my partners improved my code quality, and reviewing their code helped me understand parts of the system I did not build. Our code reviews made working as a team more seamless and enforced clear communication through commit messages, PR descriptions, and review comments.
-        </p>
+        <p class="section-sub">Skills</p>
+        <h2><span class="num">04</span>What I work with</h2>
+
+        <div class="skill-group">
+            <h4>Programming</h4>
+            <div class="skill-row">
+                <span class="chip">Java</span>
+                <span class="chip">Python</span>
+                <span class="chip">C</span>
+                <span class="chip">HTML</span>
+                <span class="chip">CSS</span>
+                <span class="chip">Excel VBA</span>
+            </div>
+        </div>
+
+        <div class="skill-group">
+            <h4>Software practices</h4>
+            <div class="skill-row">
+                <span class="chip">Test-driven development</span>
+                <span class="chip">Object-oriented design</span>
+                <span class="chip">SOLID principles</span>
+                <span class="chip">Design patterns</span>
+                <span class="chip">Git and GitHub</span>
+                <span class="chip">GitHub Actions CI</span>
+                <span class="chip">Gradle</span>
+            </div>
+        </div>
+
+        <div class="skill-group">
+            <h4>Finance and analytics</h4>
+            <div class="skill-row">
+                <span class="chip">Microsoft Suite</span>
+                <span class="chip">Pitchbook</span>
+                <span class="chip">Bloomberg Terminal</span>
+                <span class="chip">CapIQ</span>
+                <span class="chip">Statista</span>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <p class="section-sub">Contact</p>
+        <h2><span class="num">05</span>Contact</h2>
+        <div class="contact-row">
+            <a href="mailto:devon1me@gmail.com">devon1me@gmail.com</a>
+            <a href="https://www.linkedin.com/in/devon-montgomery-eder/" target="_blank" rel="noopener">linkedin.com/in/devon-montgomery-eder</a>
+            <a href="https://github.com/deder-usd" target="_blank" rel="noopener">github.com/deder-usd</a>
+        </div>
     </section>
 
 </div>
 
 <footer>
+    &copy; Devon Montgomery-Eder
 </footer>
 
 </body>
